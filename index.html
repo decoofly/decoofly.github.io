@@ -228,6 +228,433 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/05/go/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="decoo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="decoo's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/10/05/go/" itemprop="url">go</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-05T15:27:41+08:00">
+                2020-10-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="go基础"><a href="#go基础" class="headerlink" title="go基础"></a>go基础</h2><ul>
+<li><p><strong>数组</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数组定义</span></span><br><span class="line"><span class="keyword">var</span> a [<span class="number">3</span>] <span class="keyword">bool</span></span><br><span class="line"><span class="comment">//初始化</span></span><br><span class="line"><span class="keyword">var</span> b [<span class="number">3</span>] <span class="keyword">int</span> = [<span class="number">3</span>]&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;</span><br><span class="line"><span class="comment">// 数组的遍历</span></span><br><span class="line"><span class="comment">// 1.索引遍历</span></span><br><span class="line">city := [...]<span class="keyword">string</span>&#123;<span class="string">"背景"</span>, <span class="string">"团啊"</span>, <span class="string">"你好"</span>&#125;</span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(city); i++ &#123;</span><br><span class="line">    fmt.Println(city[i])</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 2.for range 遍历</span></span><br><span class="line"><span class="keyword">for</span> i, v := <span class="keyword">range</span> city &#123;</span><br><span class="line">    fmt.Println(<span class="string">"i = "</span>, i)</span><br><span class="line">    fmt.Println(<span class="string">"v = "</span>, v)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>指针</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//指针 不存在指针操作</span></span><br><span class="line"><span class="number">1.</span>取地址 =》  &amp;</span><br><span class="line"><span class="number">2.</span>根据地址取值：*</span><br></pre></td></tr></table></figure>
+
+<p><strong>make和new</strong></p>
+<p>1.make和new都是分配内存的</p>
+<p>2.new 很少用，一般用来给基本类型申请内存，string\int,返回对应类型的指针</p>
+<p>3.make是用来给slice、map、chan申请内存的，make函数返回的对应的是对应的三个基本类型本身</p>
+</li>
+<li><p><strong>map</strong></p>
+<p>1.map是引用类型，无序的</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//map</span></span><br><span class="line"><span class="keyword">var</span> m1 <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span></span><br><span class="line">m1 = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>, <span class="number">10</span>)</span><br><span class="line">fmt.Println(m1 == <span class="literal">nil</span>)</span><br><span class="line"><span class="keyword">for</span> k, v := <span class="keyword">range</span> m1 &#123;</span><br><span class="line">    fmt.Println(k,v)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.删除map中的元素</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">delete</span>(m1,<span class="string">"key"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>3.元素类型为map类型的切片</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s1 = <span class="built_in">make</span>([]<span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">string</span>, <span class="number">0</span>, <span class="number">10</span>)</span><br><span class="line"><span class="comment">//元素类型为map的切片</span></span><br><span class="line"><span class="keyword">var</span> s1 = <span class="built_in">make</span>([]<span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">string</span>, <span class="number">10</span>, <span class="number">10</span>)</span><br><span class="line">s1[<span class="number">0</span>] = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">string</span>, <span class="number">1</span>)</span><br><span class="line">s1[<span class="number">0</span>][<span class="number">10</span>] = <span class="string">"你还是"</span></span><br><span class="line">fmt.Println(s1)</span><br><span class="line"><span class="comment">//值为且切片类型的map</span></span><br><span class="line"><span class="keyword">var</span> m2 = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>][]<span class="keyword">int</span>, <span class="number">10</span>)</span><br><span class="line">m2[<span class="string">"内发货"</span>] = []<span class="keyword">int</span>&#123;<span class="number">2</span>, <span class="number">3</span>, <span class="number">45</span>&#125;</span><br><span class="line">fmt.Println(m2)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>函数</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//函数定义、</span></span><br><span class="line"> <span class="comment">//go是强类型语言</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">funcname</span><span class="params">()</span> <span class="title">returnvalue</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//1.带返回值 ret是已经声明的</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sum</span><span class="params">(x <span class="keyword">int</span>, y <span class="keyword">int</span>)</span> <span class="params">(ret <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    ret = x + y</span><br><span class="line">    <span class="keyword">return</span> <span class="comment">//这里可以不写ret</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//2.没有返回值</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">f1</span><span class="params">(x <span class="keyword">int</span>, y <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    fmt.Println(x+y)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//可变长参数</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">f2</span><span class="params">(x <span class="keyword">string</span>, y...<span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    <span class="comment">//y的类型是切片</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//defer </span></span><br><span class="line"><span class="comment">//defer执行时机是在返回值赋值完成和RET指令之间</span></span><br></pre></td></tr></table></figure>
+
+<p>2.变量的作用域</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;全局变量和局部变量</span><br></pre></td></tr></table></figure>
+
+<p>3.函数类型作为变量和返回值</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//函数作为入参变量</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">f</span><span class="params">()</span></span>&#123;</span><br><span class="line">	fmt.Prinrln(<span class="string">"x"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	a := f</span><br><span class="line">	fmt.Println(a) <span class="comment">//函数类型</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//函数作为参数</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">f2</span><span class="params">(x <span class="keyword">func</span>()</span>)</span> &#123;</span><br><span class="line">    x()</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//函数作为返回值</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">f3</span><span class="params">()</span> <span class="title">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> f()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4.匿名函数</p>
+<p>没有函数名字</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">func</span><span class="params">(x, y <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">	fmt.Println(x+y)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//函数内部</span></span><br><span class="line">    f1 := <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//只执行一次的函数还可以简写成立即执行函数</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;() <span class="comment">//()的意思是执行</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>5.闭包</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">//闭包</span></span><br><span class="line">  <span class="function"><span class="keyword">func</span> <span class="title">f1</span><span class="params">()</span></span> &#123;</span><br><span class="line">  	<span class="comment">//1</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">func</span> <span class="title">f2</span><span class="params">(x, y <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">      <span class="comment">//2</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">func</span> <span class="title">f3</span><span class="params">(f <span class="keyword">func</span>(<span class="keyword">int</span>, <span class="keyword">int</span>)</span>, <span class="title">m</span>, <span class="title">n</span> <span class="title">int</span>) <span class="title">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">      f4 := <span class="function"><span class="keyword">func</span><span class="params">()</span></span>&#123;</span><br><span class="line">          f(m,n)</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> f4</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//底层原理</span></span><br><span class="line">  <span class="comment">//1.函数可以作为返回值</span></span><br><span class="line">  <span class="comment">//2.函数内部查找变量的顺序，先在自己内部找，找不到往外层找</span></span><br><span class="line">  <span class="function"><span class="keyword">func</span> <span class="title">add</span><span class="params">()</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">      <span class="keyword">var</span> x <span class="keyword">int</span> =<span class="number">100</span></span><br><span class="line">      <span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(y <span class="keyword">int</span>)</span> <span class="title">int</span></span>&#123;</span><br><span class="line">          x += y</span><br><span class="line">          <span class="keyword">return</span> x</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//闭包等于 函数 + 外部变量的引用</span></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">  <span class="comment">//panic 程序崩溃退出</span></span><br><span class="line"><span class="comment">//err := recover() recover 必须搭配defer使用</span></span><br><span class="line">  <span class="comment">//defer 一定要在可能引发panic的语句之前定义</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>结构体</strong></p>
+<p>1.结构体定义：</p>
+<p>​    </p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/05/fmt%E6%A0%87%E5%87%86%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="decoo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="decoo's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/10/05/fmt%E6%A0%87%E5%87%86%E5%BA%93/" itemprop="url">fmt标准库</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-05T15:27:28+08:00">
+                2020-10-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="高阶知识"><a href="#高阶知识" class="headerlink" title="高阶知识"></a>高阶知识</h1><h2 id="fmt标准库"><a href="#fmt标准库" class="headerlink" title="fmt标准库"></a><strong>fmt标准库</strong></h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//输出函数</span></span><br><span class="line"><span class="comment">//Print函数：Println函数会在输出内容的结尾添加一个换行符</span></span><br><span class="line"><span class="comment">//Fprint函数输出到一个io.Writer接口类型的变量w中</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>自定义类型</strong></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> myint <span class="keyword">int</span> <span class="comment">//自定义类型</span></span><br><span class="line"><span class="keyword">type</span> yourint = <span class="keyword">int</span> <span class="comment">//类型别名</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a><strong>结构体</strong></h2><p>1.定义</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义结构体</span></span><br><span class="line"><span class="keyword">type</span> person <span class="keyword">struct</span> &#123;</span><br><span class="line">	name  <span class="keyword">string</span></span><br><span class="line">	age   <span class="keyword">int</span></span><br><span class="line">	hobby []<span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//key-value初始化</span></span><br><span class="line"><span class="keyword">var</span> p2 = person&#123;</span><br><span class="line">    name: <span class="string">"元素"</span>，</span><br><span class="line">    age: <span class="number">11</span>,</span><br><span class="line">    hobby:[]<span class="keyword">string</span>&#123;<span class="string">"1"</span>,<span class="string">"2"</span>,<span class="string">"3"</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//用值初始化，值的顺序要跟定义时一样</span></span><br><span class="line">p3 := person&#123;</span><br><span class="line">    <span class="string">"lisa"</span>,</span><br><span class="line">    <span class="number">22</span>,</span><br><span class="line">    []<span class="keyword">string</span>&#123;<span class="string">"sd"</span>,<span class="string">"ddd"</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//匿名结构体 多用于临时场景</span></span><br><span class="line"><span class="keyword">var</span> s <span class="keyword">struct</span>&#123;</span><br><span class="line">    name <span class="keyword">string</span></span><br><span class="line">    age <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//指针类型的结构体</span></span><br><span class="line"><span class="keyword">var</span> p = <span class="built_in">new</span>(person) <span class="comment">//指針類型</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//结构体匿名字段</span></span><br><span class="line"><span class="keyword">type</span> hello <span class="keyword">struct</span>&#123;</span><br><span class="line">    <span class="keyword">int</span></span><br><span class="line">    <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//嵌套</span></span><br><span class="line"><span class="keyword">type</span> address <span class="keyword">struct</span>&#123;</span><br><span class="line">    city <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">type</span> person <span class="keyword">struct</span>&#123;</span><br><span class="line">    name <span class="keyword">string</span></span><br><span class="line">    address</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//p.city =&gt; p.address.city</span></span><br><span class="line"><span class="comment">//匿名嵌套时 先在自己的结构体找对应字段，再去嵌套的里面找字段</span></span><br></pre></td></tr></table></figure>
+
+<p>2.结构体内存</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//内存分配：一个结构体是一段连续的内存</span></span><br><span class="line"><span class="comment">//进阶：内存对齐</span></span><br></pre></td></tr></table></figure>
+
+<p>3.结构体的继承</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> animal <span class="keyword">struct</span>&#123;</span><br><span class="line">    name <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(a animal)</span><span class="title">move</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//do something</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//子类 dog</span></span><br><span class="line"><span class="keyword">type</span> dog <span class="keyword">struct</span>&#123;</span><br><span class="line">    feet <span class="keyword">int</span></span><br><span class="line">    *animal</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d dog)</span> <span class="title">wang</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">//do sth</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//调用</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    d := dog&#123;</span><br><span class="line">        animal:animal&#123;name:<span class="string">"xx"</span>&#125;,</span><br><span class="line">        feet:<span class="number">4</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    d.wang()</span><br><span class="line">    d.move()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4.结构体与JSON</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义：是一种特殊的函数,是作用于特定类型的函数</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(接收变量 接收者类型)</span> 方法名（参数列表）（返回参数）</span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//定义dog结构体</span></span><br><span class="line"><span class="keyword">type</span> dog <span class="keyword">struct</span>&#123;</span><br><span class="line">    name <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//构造函数 new开头首字母大写</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">newDog</span><span class="params">(name <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> dog&#123;</span><br><span class="line">        name: name,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//方法  接收者表示调用该方法的类型变量，多用类型名的首字母小写表示</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d dog)</span> <span class="title">wang</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">//do something</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//go中如果首字母大写，表示对外部可见（公有的public）</span></span><br><span class="line"><span class="comment">// Cat 这是一个猫</span></span><br><span class="line"><span class="keyword">type</span> Cat <span class="keyword">struct</span>&#123;</span><br><span class="line">    name</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//可以给任意类型添加方法，但仅限在同一个包package</span></span><br><span class="line"><span class="comment">//使用指针类型接收者</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">1.需要修改接收者中的值</span></span><br><span class="line"><span class="comment">2.接收者是拷贝代价大的对象</span></span><br><span class="line"><span class="comment">3.保证一致性，如果有某个方法使用了指针接收者，那么其他的方法也应该使用指针接收者</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="接口interface"><a href="#接口interface" class="headerlink" title="接口interface"></a>接口interface</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//接口是一种类型，规定了变量有哪些方法</span></span><br><span class="line"><span class="keyword">type</span> 接口名 <span class="keyword">interface</span>&#123;</span><br><span class="line">    接口方法（参数值）（返回值）</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//接口的实现</span></span><br><span class="line"><span class="comment">//一个变量如果实现了所有的方法，那么这个变量就实现了这个接口</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//指针实现接口，接口可以嵌套</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//空接口</span></span><br><span class="line"><span class="keyword">type</span> xx <span class="keyword">interface</span>&#123;</span><br><span class="line">	<span class="comment">//所有的类型都实现了空接口，任意类型都可以传入空接口    </span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span>&#123;&#125; <span class="comment">//空接口没必要写名字，通常用这个定义</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="package"><a href="#package" class="headerlink" title="package"></a>package</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//包中的变量或方法等如果是小写则只能在当前包调用</span></span><br><span class="line"><span class="comment">//大写的时候可以供外部调用</span></span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/23/mysql%E9%BB%98%E8%AE%A4%E6%97%B6%E9%97%B4%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="decoo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="decoo's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/23/mysql%E9%BB%98%E8%AE%A4%E6%97%B6%E9%97%B4%E9%97%AE%E9%A2%98/" itemprop="url">mysql默认时间问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-23T13:48:28+08:00">
+                2019-12-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="mysql5-7以上设置默认时间设置："><a href="#mysql5-7以上设置默认时间设置：" class="headerlink" title="mysql5.7以上设置默认时间设置："></a>mysql5.7以上设置默认时间设置：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set sql_mode&#x3D;&#39;&#39;;</span><br><span class="line">set global sql_mode&#x3D;&quot;ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION&quot;;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/16/firstBlog/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -514,7 +941,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -555,7 +982,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
